@@ -1,25 +1,51 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Footer from '../component/footer';
+import Hero from '../component/Hero'
 
-export default function Home() {
+const ClothingProducts = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get('https://fakestoreapi.com/products?limit=5');
+      setProducts(response.data);
+      setLoading(false);
+    } catch (err) {
+      console.error("Error fetching data", err);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+
   return (
-    <div className='bg-blue-400'>
-        <div className='font-serif text-5xl text-red-500'>
-            WISHBONE
+    <div className='bg-slate-600'>
+      <h1 className='text-5xl font-serif text-white transition-transform duration-300 transform hover:scale-105'>Allure textiles</h1>
+      <h1 className='text-5xl font-serif text-red-200 transition-transform duration-300 transform hover:scale-105'>Stitching To Everyone's Choice.</h1>
+
+      <Hero />
+      {/*<div className=''>
+      <div className="product-list">
+        {products.map((product) => (
+          <div key={product.id} className="product-item">
+            <div className='border rounded-[15px] shadow-[0_4px_6px_rgba(64,64,64,0.6)] h-[280px] w-[300px] transition-transform duration-300 transform hover:scale-105'>
+            <img className='h-[180px] w-[300px] rounded-[10px]' src={product.image} alt={product.title} />
+            <h3>{product.title}</h3>
+            <p>Price: ${product.price}</p>
+            </div>
+          </div>*
+        ))}
         </div>
-        <div className='sm:flex md:flex justify-center gap-10 text-white'>
-          <p className='hover:text-blue-500'>HOURS&LOCATION</p>
-          <p className='hover:text-blue-500'>ORDER NOW</p>
-          <p className='hover:text-blue-500'>CATERING</p>
-          <p className='hover:text-blue-500'>MENUS</p>
-          <p className='hover:text-blue-500'>GIFTCARD</p>
-          <p className='hover:text-blue-500'>ABOUT</p>
-          <button className='hover:text-orange-500'>RESERVATION</button>
-        </div>
-        <div>
-          <img className='mt-5' src="resturant.png" alt="" />
-        </div>
-        <p className='hover:text-blue-500'>Powered by reuben</p>
-    </div> 
-  )
-}
+      </div>*/}
+      <Footer />
+    </div>
+  );
+};
+
+export default ClothingProducts;

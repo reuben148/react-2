@@ -1,3 +1,20 @@
+<!--
+NAME- Reuben Luka
+Project- Clothing Brand
+Fitech student corhort 1
+I want to use this meant sorry for my late submission. i have light issues.
+-->
+
+1-Optionally, integration with APIs for fetching data 
+2-Responsive design to ensure the application works well on both large and small screens using Tailwind CSS .
+3-Routing setup to navigate between pages
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
